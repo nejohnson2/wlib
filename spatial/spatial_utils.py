@@ -31,3 +31,36 @@ def spatial_join(sm_geom, lg_geom):
     df = df.join(pd.DataFrame(sm_original['geometry'], columns=['geometry']))
 
     return df
+    
+def join_files(dpath):
+    """
+    Get all .shp files and join them into
+    one shapefile.
+    
+    Parameters
+    ----------
+    
+    dpath : str, required
+        Path to folder
+        
+    Return
+    ------
+    
+    df : GeoDataFrmae
+        
+    """
+    files = glob.glob(os.path.join(dpath + '/*.shp'))
+    
+    df = gp.GeoDataFrame()
+    df_crs = {}
+    for i in files:
+        _ = gp.GeoDataFrame.from_file(i)
+        df_crs = _.crs
+        df = df.append(_, ignore_index=True)
+    
+    df.set_geometry(df.geometry, inplace=True)
+    df.crs = df_crs
+    
+    return df
+    
+    

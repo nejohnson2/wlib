@@ -105,38 +105,3 @@ def unzip(fpath):
 
     os.remove(fpath) # remove .gz file        
 
-def combine_data(dpath, date=None):
-    """
-    Function to combine LEHD csv files.  Adds a column
-    named 'Year' to the dataset.
-    
-    Parameters
-    ----------
-    
-    dpath : str, required
-        Path to LEHD dataset to combine
-    
-    date : str, list optional
-        Year of the data to read.  Defualt
-        is all files.  This is not implemented
-        yet!
-        
-    Returns
-    -------
-    
-    Dataframe
-    
-    """
-    allFiles = glob.glob(dpath + "/*.csv")
-    frame = pd.DataFrame()
-    list_ = []
-    for file_ in allFiles:
-        print "Reading " + file_
-        fname = os.path.split(file_)[1] # get filename
-        date = fname[(len(fname)-8):-4] # get date from filename
-        df = pd.read_csv(file_,index_col=None, header=0)
-        df['Year'] = date # add date to dataframe
-        list_.append(df)
-    df = pd.concat(list_)  
-        
-    return df
