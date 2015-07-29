@@ -39,7 +39,8 @@ def download_pophu(state=['36']):
 
 def sub_census(data, counties=['005','047','061','081','085']):
     """
-    Subset census spatial geometries based on counties.
+    Subset census spatial geometries based on counties.  Default
+    returns counties for New York City.
     
     Parameters
     ----------

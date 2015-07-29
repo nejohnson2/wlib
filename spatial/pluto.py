@@ -5,7 +5,7 @@ import geopandas as gp
 import pandas as pd
 
 
-def read_pluto(dpath=None, bor=None, cols=None):
+def read_pluto(dpath=None, bor=None, cols=['geometry', 'BBL']):
     """
     Read the Pluto Data and retrun the five boroughs into 
     one GeoDataFrame.
@@ -23,6 +23,11 @@ def read_pluto(dpath=None, bor=None, cols=None):
         List of columns to keep when building the PLUTO
         data set.  Default is 'geometry' and 'BBL'
         
+    Returns
+    -------
+    
+    df : DataFrame
+        
     """
 
     if dpath==None:
@@ -39,9 +44,6 @@ def read_pluto(dpath=None, bor=None, cols=None):
         allFiles = [j for i in allFiles for j in i]
         
     print "Detected " + str(len(allFiles)) + " files."
-    
-    if cols==None:
-        cols = ['geometry', 'BBL']
     
     # read file and append to master file
     df = gp.GeoDataFrame()
