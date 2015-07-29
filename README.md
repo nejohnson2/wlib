@@ -6,7 +6,6 @@ particular the NYC Pluto Data and the LEHD data.  There are four libraries: *spa
 ## LEHD Library
 
 
----
 
 ## Spatial Library
 
@@ -50,11 +49,10 @@ Functions:
 
 ---
 
-## Waste
+## Waste Library
 A module to do repetative operations on the DSNY waste data.
 
 
----
 
-## ds_utilities
+## ds_utilities Library
 These are utility functions where doing data science.

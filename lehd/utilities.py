@@ -1,21 +1,16 @@
 import glob, os 
 import pandas as pd
 
-def combine_data(dpath, date=None):
+def read_all_data(dpath=None):
     """
-    Function to combine LEHD csv files.  Adds a column
+    Function to read all LEHD csv files.  Adds a column
     named 'Year' to the dataset.
     
     Parameters
     ----------
     
-    dpath : str, required
-        Path to LEHD dataset to combine
-    
-    date : str, list optional
-        Year of the data to read.  Defualt
-        is all files.  This is not implemented
-        yet!
+    dpath : str, optional
+        Path to LEHD dataset.  Default is './LEHD_Data/ny_rac/'
         
     Returns
     -------
@@ -23,6 +18,10 @@ def combine_data(dpath, date=None):
     Dataframe
     
     """
+    
+    if dpath==None:
+        dpath = './LEHD_Data/ny_rac/'
+        
     allFiles = glob.glob(dpath + "/*.csv")
     frame = pd.DataFrame()
     list_ = []
@@ -34,7 +33,7 @@ def combine_data(dpath, date=None):
         df['Year'] = date # add date to dataframe
         list_.append(df)
     df = pd.concat(list_)  
-        
+    
     return df
 
 def sub_year(data, year):
@@ -58,13 +57,14 @@ def sub_year(data, year):
 
     if type(year) == list:
         result = data[data['Year'].isin(year)]
+        return result
     elif type(year) == int:
         result = data[data['Year'] == year]
+        return result
     else:
         print "Error: Unknown type"
         return
     
-    return result
 
 def sub_county(data, col='h_geocode', county=['005', '047','061','081','085']):
     """
