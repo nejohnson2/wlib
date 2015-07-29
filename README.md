@@ -1,22 +1,19 @@
 # Homemade Libraries
 
 This is an experiment to develop my own python libraries for analyzeing various datasets.  In 
-particular the NYC Pluto Data and the LEHD data.
+particular the NYC Pluto Data and the LEHD data.  There are four libraries: *spatial*, *ds_utilities*, *lehd* and *waste*.
 
-## Example Usage
+## LEHD Library
 
-```python
-from wlib import pluto
 
-pluto.download_files(unzip=True)
-df = pluto.read_pluto(dpath, bor, cols)
+---
 
-```
+## Spatial Library
 
-## Spatial
+
 This is a library focused on working with spatial data.  There is a module *census*, *pluto* and *spatial_utils*.
 
-### Census Module
+*Census Module*
 Functions:
 
 - download_pophu: this downloads a shapefile that contains population and housing units. 
@@ -30,7 +27,7 @@ df = census.sub_census(df, counties=['005','047','061','081','085'])
 
 ```
 
-### PLUTO
+*PLUTO Module*
 Functions:
 
 - read_pluto()
@@ -45,14 +42,19 @@ pluto.download_all_pluto()
 df = pluto.read_pluto()
 ```
 
-### Spatial_utils
+*Spatial_utils*
 Functions:
 
 - spatial_join
 - join_files
 
+---
+
 ## Waste
 A module to do repetative operations on the DSNY waste data.
+
+
+---
 
 ## ds_utilities
 These are utility functions where doing data science.
