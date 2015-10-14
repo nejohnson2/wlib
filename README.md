@@ -58,15 +58,23 @@ df = pluto.read_pluto()
 *Spatial_utils*
 Functions:
 
-- spatial_join
-- join_files
-
----
+- spatial_join()
+- join_files()
 
 ## Waste Library
 A module to do repetative operations on the DSNY waste data.
 
+```python
+import waste
 
+df = waste.read_waste(cleaned=True)
+refuse = waste.sep_materials(df, material_type_code=1)
+```
+
+*Other Functionss*
+
+- drop_specific_sections()
+- clean_district()
 
 ## ds_utilities Library
-These are utility functions where doing data science.
+These are utility functions where doing data science. In development.
