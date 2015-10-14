@@ -16,6 +16,9 @@ sys.path.append('path/to/wlib')
 import lehd
 
 lehd.download_specific('NY', 'RAC')
+
+df = lehd.read_all_data('path/to/data')
+df = lehd.sub_county(df)
 ```
 
 ## Spatial Library
