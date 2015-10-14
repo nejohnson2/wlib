@@ -5,7 +5,7 @@ import geopandas as gp
 import pandas as pd
 
 
-def read_pluto(dpath=None, bor=None, cols=['geometry', 'BBL']):
+def read_pluto(dpath=None, bor=None, cols=['geometry', 'BBL', 'LandUse']):
     """
     Read the Pluto Data and retrun the five boroughs into 
     one GeoDataFrame.
@@ -14,14 +14,14 @@ def read_pluto(dpath=None, bor=None, cols=['geometry', 'BBL']):
     ----------
     dpath : str, optional
         The path to the PLUTO Datasets(all five boroughs)
-        Should be '/PLUTO/'.  Default is './PLUTO'
+        Should be '/PLUTO'.  Default is '../PLUTO'
     
     bor : list, optional
         Specific borough to read
         
     cols : list, optional
         List of columns to keep when building the PLUTO
-        data set.  Default is 'geometry' and 'BBL'
+        data set.  Default is 'geometry', 'BBL' and 'LandUse'
         
     Returns
     -------
@@ -31,7 +31,7 @@ def read_pluto(dpath=None, bor=None, cols=['geometry', 'BBL']):
     """
 
     if dpath==None:
-        dpath = './PLUTO/'
+        dpath = '../Data/PLUTO/'
 
     print "Reading Pluto files from " + dpath
 
@@ -61,7 +61,7 @@ def read_pluto(dpath=None, bor=None, cols=['geometry', 'BBL']):
     
     return df
 
-def download_files(url=None, unzip=True):
+def download(url=None, unzip=True):
     """
     Download Pluto data, unzip and remove old files.
     
@@ -116,7 +116,7 @@ def download_all_pluto():
         
     sources = [bx, qn, bk, mn, si]
     
-    [download_files(url=i) for i in sources]
+    [download(url=i) for i in sources]
     
     os.chdir('..')
     
@@ -143,3 +143,31 @@ def subset_zip(df, zipCode):
     
     return df
     
+def subset_landuse(df, landuse=['01','02','03','04','08']):
+    """
+    Subset PLUTO data by landuse value.
+    
+    Parameters
+    ----------
+    
+    df : GeoDataFrame, required
+        PLUTO geodataframe
+    
+    landuse : int, list, required
+        Two digit number between 1 and 11 which 
+        represents landuse categories.  Default
+        values are '01','02','03','04','08'.
+        
+    Returns
+    -------
+    
+    GeoDataFrame
+    """
+    
+    if type(landuse) == int:
+        df = data[data['LandUse'] == landuse]
+    elif type(landuse) == list:
+        df = data[data['LandUse'].isin(landuse)]
+    
+    return df
+        

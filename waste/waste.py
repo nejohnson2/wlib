@@ -1,7 +1,18 @@
+'''
+Collection of functions to cleanup the DSNY data.
+
+This should be turned into a module eventually.
+
+Author:
+Nicholas Johnson
+
+'''
+
 import pandas as pd
 from datetime import datetime
 
-def read_waste(dpath=None,cols=None, data_types=None, cleaned=False):
+
+def read_waste(dpath=None,cols=None, data_types=None, cleaned=True):
     """
     Default waste reader
     
@@ -31,7 +42,7 @@ def read_waste(dpath=None,cols=None, data_types=None, cleaned=False):
         dpath = '../Data/workcomp_extract.csv'
 
     if cols==None:
-        cols = ['Tons_Collected', 'Dump_Time_Stamp', 'Section_Code','Truck_ID', 'Material_Type_Code']
+        cols = ['Tons_Collected', 'Dump_Time_Stamp', 'Section_Code','Truck_ID', 'Material_Type_Code', 'Route_Code']
         
     if data_types==None:
         data_types = {
@@ -39,7 +50,8 @@ def read_waste(dpath=None,cols=None, data_types=None, cleaned=False):
             'Section_Code': str,
             'Tons_Collected': float,
             'Dump_Time_Stamp': str,
-            'Material_Type_Code': int
+            'Material_Type_Code': int,
+            'Route_Code': str 
             }
     
     if cleaned==True:
@@ -161,4 +173,50 @@ def ts_set_index(df):
     
     df.set_index('Dump_Time_Stamp', inplace=True)
     
+    return df
+
+def drop_specific_sections(df):
+    """
+    Remove sections from waste data that
+    do not appear in the waste shapefile.
+
+    Parameters
+    ----------
+
+    df: DataFrame, required
+
+    """
+
+    drop_cols = ['AFFB02', 'AFFBK', 'AFFBX', 'AFFM03', 'AFFM10', 'AFFMN', 'AFFQN',
+       'AFFS02', 'AFFSI', 'BKLC1', 'BKLC2', 'BKLC3', 'BKLC4', 'BXLC1',
+       'FKA1', 'MN012', 'MN102', 'MNLC1', 'MNLC2', 'OTHCLN', 'OTHSCH',
+       'QEB1', 'QELC1', 'QELC2', 'SILC1', 'SILC2']
+
+    df = df[~df['Section_Code'].isin(drop_cols)]
+
+    return df
+
+def read_raw(dpath=None):
+    """
+    Read raw sanitation data
+
+    Parameters
+    ----------
+
+    dpath: path/to/csv 
+
+    Returns
+    -------
+
+    Dataframe
+    """
+
+    if dpath==None:
+        dpath = '../Data/workcomp_extract.csv'
+
+    df = pd.read_csv(dpath)
+
+    print("Reading Sanitation Data")
+    print("Reading:   file = {0}".format(dpath))
+
     return df

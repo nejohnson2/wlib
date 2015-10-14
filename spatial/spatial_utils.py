@@ -1,6 +1,7 @@
 import geopandas as gp
 import pandas as pd
 from geopandas.tools import sjoin
+from shapely.geometry import Point
 
 def spatial_join(sm_geom, lg_geom):
     """
@@ -63,4 +64,7 @@ def join_files(dpath):
     
     return df
     
-    
+def create_point_from_lat_lon(lat, lon):
+    """Convert Lat/Lon corrdinates into a geometry object"""
+
+    return Point(lat,lon)

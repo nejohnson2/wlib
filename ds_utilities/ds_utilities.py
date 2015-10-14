@@ -7,11 +7,11 @@ def above_std(val, num=3):
     Parameters
     ----------
     
-    val : Series, requried
+    val : Series, required
         Data to calculate the standard deviation
         
     num : int, optional
-        Multiplyer for the number of standard deviations
+        Multiplier for the number of standard deviations
         to calculate against a value.  Default is 3
         
     Returns

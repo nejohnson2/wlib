@@ -10,7 +10,7 @@ def read_all_data(dpath=None):
     ----------
     
     dpath : str, optional
-        Path to LEHD dataset.  Default is './LEHD_Data/ny_rac/'
+        Path to LEHD dataset.  Default is './LEHD_Data/NY_RAC/'
         
     Returns
     -------
@@ -20,7 +20,7 @@ def read_all_data(dpath=None):
     """
     
     if dpath==None:
-        dpath = './LEHD_Data/ny_rac/'
+        dpath = './LEHD_Data/NY_RAC/'
         
     allFiles = glob.glob(dpath + "/*.csv")
     frame = pd.DataFrame()
