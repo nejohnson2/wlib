@@ -3,9 +3,20 @@
 This is an experiment to develop my own python libraries for analyzeing various datasets.  In 
 particular the NYC Pluto Data and the LEHD data.  There are four libraries: *spatial*, *ds_utilities*, *lehd* and *waste*.
 
+To import these modules, I do this:
+
+```python
+import sys
+sys.path.append('path/to/wlib')
+```
+
 ## LEHD Library
 
+```python
+import lehd
 
+lehd.download_specific('NY', 'RAC')
+```
 
 ## Spatial Library
 
