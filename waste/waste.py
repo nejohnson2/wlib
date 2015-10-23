@@ -61,7 +61,8 @@ def read_waste(dpath=None,cols=None, data_types=None, cleaned=True):
         df = rm_nan_time(df)
         df = rm_truck_id(df)
         df = ts_set_index(df)
-        df['Section_Code'] = df['Section_Code'].apply(clean_district)
+        df['Section_Code'] = df['Section_Code'].map(clean_district)
+        df = drop_specific_sections(df)
         return df
     else:
         df = pd.read_csv(dpath, usecols=cols, dtype=data_types)

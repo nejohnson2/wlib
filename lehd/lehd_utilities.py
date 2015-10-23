@@ -68,7 +68,9 @@ def sub_year(data, year):
 
 def sub_county(data, col='h_geocode', county=['005', '047','061','081','085']):
     """
-    Subset LEHD data by county number.
+    Subset LEHD data by county number. Note that the column 
+    names are different for each dataset. 'h_geocode' is 
+    for the RAC data and 'w_geocode' is for the WAC data.
     
     Parameters
     ----------

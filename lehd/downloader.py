@@ -50,8 +50,12 @@ def download_specific(state, source, seg='S000', jtype='JT00', version='LODES7')
     soup = BeautifulSoup(page.content, 'html.parser') # make the page beautiful
     samples = soup.find_all("a") # get all links on the page
 
-    f = [a.attrs['href'] for a in samples[5:]]
-    ff = state.lower() + '_' + source.lower() + '_' + seg + '_' + jtype + '_'
+    if source.lower() == 'od':
+        print "This is not working"
+        return
+    else:
+        f = [a.attrs['href'] for a in samples[5:]]
+        ff = state.lower() + '_' + source.lower() + '_' + seg + '_' + jtype + '_'
 
     # compare all links on the page to the desired links (with all dates)
     index = []
